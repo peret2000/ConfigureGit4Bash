@@ -10,5 +10,3 @@ cd $SCRIPT_DIR
 
 cp git-* $HOME
 cat bashrc4git >> $HOME/.bashrc
-
-. /usr/share/bash-completion/completions/git
