@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Función de autocompletado para branch-compare (brc)
+_git_brc() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    local branches
+
+    # Obtener lista de ramas
+    branches=$(git branch --all --format='%(refname:short)')
+    # Añadir HEAD a las opciones
+    options="HEAD $branches"
+
+    # Si estamos en el primer argumento después del comando
+    if [ "$COMP_CWORD" -ge 2 ]; then
+        COMPREPLY=($(compgen -W "$options" -- "$cur"))
+    fi
+}
+
+# Registra la función de autocompletado
+if [ -n "$BASH" ]; then
+    complete -F _git_brc git-brc
+
+    # También necesitamos registrarlo para el alias
+    __git_complete brc _git_brc
+fi
