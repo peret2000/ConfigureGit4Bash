@@ -30,8 +30,12 @@ NO_COLOR='\033[0m'
 
 listado=$(git rev-list --boundary --left-right "$base_commit"..."$target_commit")
 
-#Commits comunes: deben ordenarse por fecha primero
-comunes=$(echo "$listado" | grep ^-| sed 's/^-\(.*\)$/\1/' | xargs git show -s --format="%at %H" | sort -r | cut -d ' ' -f2)
+#Commits comunes:
+# Deben ordenarse por fecha primero, y para ello antes hay que comprobar que $comunes no está vacío, porque se mostraría
+# el commit actual (HEAD). En caso de estar vacío, se obtiene el commit base con git merge-base
+test -n "$listado" \
+    && comunes=$(echo "$listado" | grep ^-| sed 's/^-\(.*\)$/\1/' | xargs git show -s --format="%at %H" | sort -r | cut -d ' ' -f2) \
+    || comunes=$(git merge-base --octopus "$base_commit" "$target_commit")
 
 # Último commit común:
 
