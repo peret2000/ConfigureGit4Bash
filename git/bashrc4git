@@ -1,5 +1,6 @@
 . ~/git/git-prompt.sh
 export GIT_COMPLETION_SHOW_ALL=1
+export GIT_COMPLETION_SHOW_ALL_COMMANDS=1
 . /usr/share/bash-completion/completions/git
 export GIT_PS1_SHOWDIRTYSTATE=1			# Unstaged -> *. Staged -> +
 export GIT_PS1_SHOWSTASHSTATE=1			# $
