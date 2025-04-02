@@ -23,3 +23,6 @@ export LS_COLORS
 
 # Script de autocompletado de comandos git personalizados
 . ~/git/git-completion-custom
+
+# Alias para usar 'git diff' para diferencias de ficheros
+alias diff='git diff --no-index'
